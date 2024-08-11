@@ -157,6 +157,6 @@ rosters = rosters.sort_values(["Owner", "Position"])[
 rosters.to_csv(f"{draft_year}_high_steaks_final_rosters.csv", index=False)
 
 print("Two files saved.")
-print(f"{draft_year}_high_steaks_draft_results.csv")
-print(f"{draft_year}_high_steaks_final_rosters.csv")
+print(f"draft_results/{draft_year}_high_steaks_draft_results.csv")
+print(f"draft_results/{draft_year}_high_steaks_final_rosters.csv")
 #%% End of script
