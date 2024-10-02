@@ -3,7 +3,7 @@ import requests
 import pandas as pd
 from sleeper_wrapper import League
 
-league_id = str(992209949692043264)
+league_id = str(1120567286148091904)
 league = League(league_id)
 
 nfl_state = requests.get("https://api.sleeper.app/v1/state/nfl").json()
@@ -23,13 +23,13 @@ user2owner = {
     "bobm18":"Bobby",
     "jide49":"Jide",
 }
-week="10"
-
+week=str(input("what week of the season are you looking for?"))
+print(f"Looking at {season} Week {week}")
 # %%
 matchups = league.get_matchups(week)
 users = league.get_users()
 rosters = league.get_rosters()
-board = league.get_scoreboards(rosters, matchups, users, score_type="pts_ppr", week=week, season=2023)
+board = league.get_scoreboards(rosters, matchups, users, score_type="pts_ppr", week=week, season=season)
 matchups = pd.DataFrame(matchups)
 users = pd.DataFrame(users)
 users["owner"] = [user2owner[u] for u in users.display_name.unique()]
@@ -66,7 +66,7 @@ elif week == "4":
     for i,m in matchups.iterrows():
         scorers = m.players_points
         for s in m.starters:
-            dist_from_21 = abs(21 - scorers[s])
+            dist_from_21 = min(abs(21 - scorers[s]), abs(scorers[s] - 21))
             player_name = players_df.query("player_id == @s").full_name[0]
             to_21_list.append([player_name, m.owner, scorers[s], dist_from_21])
     to_21_df = pd.DataFrame(to_21_list, columns=["full_name", "owner", "score", "dist_to_21"])
