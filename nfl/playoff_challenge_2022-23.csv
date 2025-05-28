@@ -1,0 +1,105 @@
+﻿team_id,Owner,QB,QB,RB,RB,WR,WR,WR,TE,FLX,FLX,K,D/ST
+1,Brad K1,Burrow,Allen,Ekeler,McCaffrey,Lamb,Jefferson,AJ Brown,Kelce,Barkley,Etienne,Myers,TB D/ST
+2,Brad K2,Mahomes,Allen,Ekeler,Etienne,Evans,Jefferson,Chase,Kittle,Lamb,AJ Brown,Myers,NYG D/ST
+3,Brad K3,Mahomes,Allen,Ekeler,Barkley,Evans,Jefferson,Chase,Schultz,McCaffrey,AJ Brown,Myers,JAX D/ST
+4,Hack,Burrow,Hurts,Ekeler,McCaffrey,Jefferson,Diggs,Hill,Kelce,Barkley,Evans,Tucker,DAL D/ST
+5,Christian 1,Mahomes,Allen,McCaffrey,Ekeler,Jefferson,Chase,Godwin,Schultz,Kirk,D Smith,Gano,SEA D/ST
+6,Nik K,Burrow,Mahomes,McCaffrey,Ekeler,Diggs,Jefferson,AJ Brown,Schultz,Evans,Barkley,Tucker,JAX D/ST
+7,Joe G1,Allen,Lawrence,McCaffrey,Ekeler,Jefferson,Chase,AJ Brown,Kelce,Lamb,Barkley,Myers,TB D/ST
+8,Joe G2,Mahomes,Allen,Ekeler,Barkley,Jefferson,Chase,AJ Brown,Kittle,Lamb,Etienne,Myers,TB D/ST
+9,Joe G3,Mahomes,Burrow,Ekeler,Barkley,Jefferson,AJ Brown,Lamb,Kittle,Diggs,Etienne,Myers,TB D/ST
+10,Joe G4,Allen,Burrow,Ekeler,Barkley,Jefferson,AJ Brown,Lamb,Kelce,McCaffrey,Etienne,Myers,TB D/ST
+11,Joe G5,Burrow,Lawrence,McCaffrey,Ekeler,Diggs,Jefferson,AJ Brown,Kelce,Lamb,Barkley,Myers,TB D/ST
+12,Gore 1,Mahomes,Hurts,Walker III,D Cook,Lamb,Diggs,Kirk,Kittle,Barkley,Mixon,Tucker,LAC D/ST
+13,Gore 2,Allen,Prescott,Sanders,Etienne,Jefferson,Chase,R James,Kelce,McCaffrey,Ekeler,Myers,MIA D/ST
+14,Braden,Hurts,Mahomes,McCaffrey,D Cook,Chase,Diggs,Kirk,Andrews,Metcalf,Elliott,Sanders,TB D/ST
+15,Dan G,Allen,Mahomes,McCaffrey,Fournette,Hill,Jefferson,Chase,Engram,AJ Brown,Metcalf,Dicker,BAL D/ST
+16,Michael B1,Hurts,Allen,McCaffrey,Ekeler,Jefferson,Kirk,Godwin,Kelce,Chase,Walker III,Tucker,DAL D/ST
+17,Sass 1,Hurts,Allen,McCaffrey,Ekeler,Jefferson,Chase,Lamb,Kelce,Hill,Etienne,Tucker,TB D/ST
+18,Sass 2,Mahomes,Prescott,Ekeler,Walker III,Diggs,AJ Brown,Waddle,Hockenson,Barkley,Kirk,Succop,SF D/ST
+19,Kyle S1,Mahomes,Burrow,McCaffrey,Ekeler,Jefferson,Diggs,Lamb,Engram,Godwin,AJ Brown,Myers,NYG D/ST
+20,Kyle S2,Allen,Hurts,Etienne,Barkley,Jefferson,Evans,Higgins,Kelce,McCaffrey,Walker III,Dicker,DAL D/ST
+21,Kyle N,Brady,Hurts,McCaffrey,D Cook,Diggs,Chase,Lamb,Kelce,Hill,Ekeler,Myers,BAL D/ST
+22,FILECIA 1,Mahomes,Hurts,McCaffrey,Ekeler,Diggs,Chase,Jefferson,Engram,Lamb,Barkley,Myers,BAL D/ST
+23,FILECIA 2,Allen,Purdy,Mixon,Ekeler,Jefferson,AJ Brown,Godwin,Kelce,Barkley,Lamb,Tucker,JAX D/ST
+24,Matt M1,Burrow,Allen,McCaffrey,Ekeler,Lamb,Evans,Jefferson,Kelce,Hill,AJ Brown,Gano,JAX D/ST
+25,Matt M2,Allen,Mahomes,McCaffrey,Fournette,AJ Brown,Jefferson,K Allen,Andrews,Chase,Hill,Maher,SEA D/ST
+26,AL,Allen,Burrow,McCafferey,Ekeler,AJ Brown,Jefferson,Lamb,Kelce,Barkley,Etienne,Tucker,TB D/ST
+27,Nick H,Allen,Hurts,McCaffrey,Ekeler,Chase,Jefferson,Lamb,Kelce,Hill,Evans,Tucker,NYG D/ST
+28,Brian C,Allen,Hurts,McCaffrey,Ekeler,Chase,Jefferson,Lamb,Kelce,Barkley,Godwin,Patterson,BAL D/ST
+29,Matt D,Allen,Lawrence,McCaffrey,Ekeler,Hill,Evans,Jefferson,Kelce,Sanders,Chase,Maher,NYG D/ST
+30,Ken K,Allen,Hurts,McCaffrey,Ekeler,Chase,Lamb,Jefferson,Kelce,Hill,Barkley,Tucker,JAX D/ST
+31,Warren,Burrow,Allen,McCaffrey,Pollard,Evans,Jefferson,K Allen,Kelce,AJ Brown,Hill,Tucker,SEA D/ST
+32,Kamil,Mahomes,Hurts,D Cook,Elliott,Diggs,Hill,Metcalf,Kittle,Chase,Ekeler,Succop,BAL D/ST
+33,Mike A,Allen,Burrow,McCaffrey,Ekeler,Jefferson,AJ Brown,Evans,Kelce,Hill,Lamb,Myers,JAX D/ST
+34,Timbo,Allen,Burrow,McCaffrey,Ekeler,Kirk,Lamb,Jefferson,Kelce,Hill,Evans,Myers,PHI D/ST
+35,Josh St,Burrow,Mahomes,McCaffrey,D Cook,AJ Brown,K Allen,Diggs,Engram,Lamb,Evans,Tucker,MIA D/ST
+36,Brad W1,Hurts,Allen,Etienne,Ekeler,Higgins,Samuel,Jefferson,Kelce,Evans,Lamb,Myers,NYG D/ST
+37,Brad W2,Burrow,Purdy,McKinnon,Pollard,Diggs,Godwin,Kirk,Goedert,K Allen,Jefferson,Myers,NYG D/ST
+38,Connor,Allen,Brady,McCaffrey,Ekeler,Chase,Jefferson,AJ Brown,Kelce,Lamb,Barkley,Tucker,JAX D/ST
+39,Emmanuel,Mahomes,Allen,Ekeler,McCaffrey,Jefferson,Lockett,Hill,Goedert,Mixon,Etienne,Gano,DAL D/ST
+40,Joey L,Herbert,Hurts,McCaffrey,Barkley,Diggs,Evans,Jefferson,Kelce,Lamb,Mixon,Myers,BAL D/ST
+41,Billy,Allen,Burrow,Pollard,Etienne,Jefferson,Evans,AJ Brown,Kelce,Waddle,Kittle,Tucker,SF D/ST
+42,Gorski 1,Allen,Hurts,Barkley,McCaffrey,Jefferson,Waddle,Chase,Kelce,Ekeler,Evans,Tucker,DAL D/ST
+43,Gorski 2,Mahomes,Brady,Etienne,D Cook,Lamb,Diggs,Hill,Kittle,Mixon,AJ Brown,Dicker,BAL D/ST
+44,Chris B,Allen,Burrow,Elliott,McCaffrey,Jefferson,Hill,Evans,Kelce,Lockett,Etienne,Tucker,NYG D/ST
+45,Jaime,Allen,Hurts,McCaffrey,Ekeler,Chase,Jefferson,Godwin,Kelce,Etienne,Barkley,Myers,DAL D/ST
+46,Rhodes 1,Allen,Purdy,Mixon,Ekeler,Evans,Jefferson,AJ Brown,Kelce,Barkley,Kirk,Myers,DAL D/ST
+47,Rhodes 2,Mahomes,Burrow,Barkley,Pollard,Godwin,Diggs,AJ Brown,Hockenson,Etienne,Hill,Tucker,SF D/ST
+48,Ham 1,Allen,Hurts,McKinnon,Etienne,Lamb,Godwin,Chase,Kittle,Ekeler,Osborn,Tucker,NYG D/ST
+49,Ham 2,Mahomes,Burrow,Ekeler,Etienne,AJ Brown,Evans,Jefferson,Knox,Barkley,McCaffrey,Tucker,DAL D/ST
+50,John T,Allen,Hurts,McCaffrey,Barkley,Jefferson,Chase,Lamb,Kelce,Etienne,Evans,Tucker,LAC D/ST
+51,Matt Y,Allen,Mahomes,Ekeler,Barkley,Chase,Jefferson,AJ Brown,Kittle,Godwin,Lamb,Tucker,JAX D/ST
+52,Charlie,Burrow,Mahomes,Ekeler,Barkley,AJ Brown,Jefferson,Evans,Kittle,Hill,Diggs,Tucker,DAL D/ST
+53,Steve M1,Allen,Hurts,McCaffrey,Ekeler,Jefferson,Chase,Hill,Kelce,Barkley,Lamb,Tucker,JAX D/ST
+54,Steve M2,Mahomes,Hurts,Etienne,Ekeler,Jefferson,Waddle,Chase,Kittle,Davis,Lamb,Succop,BAL D/ST
+55,Steve M3,Allen,Hurts,McKinnon,McCaffrey,Jefferson,Chase,Waddle,Andrews,Ekeler,Evans,Maher,JAX D/ST
+56,Steve M4,Burrow,Purdy,D Cook,Ekeler,D Smith,Hill,Lamb,Kelce,Diggs,Barkley,Tucker,JAX D/ST
+57,Steve M5,Burrow,Hurts,McCaffrey,Ekeler,Jefferson,Hill,Diggs,Kelce,Lamb,Barkley,Tucker,JAX D/ST
+58,Bobby 1,Mahomes,Allen,McCaffrey,Ekeler,Lamb,Jefferson,Hill,Engram,Chase,Barkley,Tucker,SEA D/ST
+59,Bobby 2,Hurts,Burrow,McCaffrey,Ekeler,Evans,Jefferson,Lamb,Kelce,Diggs,Barkley,Tucker,JAX D/ST
+60,Robert,Burrow,Brady,McCaffrey,Ekeler,Lamb,Jefferson,Metcalf,Kelce,Andrews,Barkley,Elliott,BUF D/ST
+61,Reid,Burrow,Mahomes,McCaffrey,Sanders,Jefferson,Lamb,Evans,Andrews,Diggs,Barkley,Sanders,JAX D/ST
+62,Anthony Z,Mahomes,Burrow,McCaffrey,Barkley,Diggs,Evans,AJ Brown,Engram,Jefferson,Lamb,Tucker,LAC D/ST
+63,Blake 1,Mahomes,Brady,McCaffrey,Ekeler,Kirk,Chase,AJ Brown,Schultz,D Cook,J Cook,Myers,NYG D/ST
+64,Blake 2,Allen,Burrow,McCaffrey,Barkley,Lamb,D Smith,K Allen,Kelce,Lockett,Waddle,Succop,BAL D/ST
+65,Josh K1,Allen,Hurts,McCaffrey,Ekeler,Jefferson,Lamb,Chase,Kelce,Evans,Barkley,Tucker,JAX D/ST
+66,Josh K2,Mahomes,Hurts,McCaffrey,Ekeler,Jefferson,Diggs,Lamb,Engram,Chase,Evans,Gano,BAL D/ST
+67,Josh K3,Burrow,Hurts,McCaffrey,Ekeler,Jefferson,Diggs,Lamb,Kelce,Evans,Barkley,Patterson,SEA D/ST
+68,Leo G,Allen,Burrow,McCaffrey,Ekeler,AJ Brown,Evans,Jefferson,Kelce,Lamb,Etienne,Tucker,NYG D/ST
+69,Amir,Mahomes,Brady,Elliott,Ekeler,AJ Brown,Diggs,Hill,Andrews,Jefferson,Higgins,Myers,SF D/ST
+70,Sergio 1,Mahomes,Prescott,Ekeler,Barkley,Diggs,Jefferson,Chase,Kittle,AJ Brown,Evans,Tucker,SEA D/ST
+71,John I1,Allen,Hurts,McCaffrey,Ekeler,Jefferson,Kirk,Lamb,Kelce,Chase,Barkley,Tucker,TB D/ST
+72,John I2,Allen,Mahomes,D Cook,Pollard,Evans,AJ Brown,Lockett,Kittle,K Allen,Mixon,Tucker,JAX D/ST
+73,Busch 1,Allen,Hurts,McCaffrey,Walker III,K Allen,Kirk,Waddle,Barkley,D Cook,Mixon,Succop,DAL D/ST
+74,Busch 2,Burrow,Mahomes,McCaffrey,D Cook,Lockett,Kirk,Waddle,Schultz,Ekeler,Diggs,Elliott,TB D/ST
+75,Matt R1,Mahomes,Burrow,Ekeler,Barkley,Jefferson,Diggs,Evans,Andrews,Waddle,Lamb,Elliott,SF D/ST
+76,Matt R2,Allen,Purdy,Ekeler,D Cook,Hill,Chase,Metcalf,Kelce,Etienne,Elliott,Tucker,PHI D/ST
+77,Kyle K,Hurts,Allen,McCaffrey,Ekeler,Jefferson,Chase,Evans,Kelce,Hill,Barkley,Tucker,DAL D/ST
+78,Tara K,Burrow,Hurts,Elliott,McCaffrey,Diggs,Jefferson,Evans,Kelce,Etienne,Hill,Gano,SEA D/ST
+79,Michael B2,Allen,Cousins,Ekeler,Mixon,Z Jones,Lockett,AJ Brown,Kelce,McCaffrey,Barkley,Succop,DAL D/ST
+80,Sergio 2,Allen,Hurts,Mixon,McCaffrey,Jefferson,Evans,K Allen,Kelce,Etienne,Lamb,Gano,SEA D/ST
+81,Thomas,Burrow,Hurts,McCaffrey,Ekeler,Jefferson,Diggs,Lamb,Kelce,Godwin,Barkley,Patterson,BAL D/ST
+82,Sean,Mahomes,Burrow,McCaffrey,Ekeler,Jefferson,Diggs,Evans,Schultz,Lockett,Etienne,Tucker,PHI D/ST
+83,Anthony D1,Allen,Hurts,Jefferson,Chase,Evans,Ekeler,Barkley,Kelce,McCaffrey,Hill,Tucker,DAL D/ST
+84,Anthony D2,Mahomes,Burrow,Lamb,Diggs,Waddle,Etienne,Ekeler,Hockenson,AJ Brown,McCaffrey,Myers,TB D/ST
+85,Raghu,Burrow,Allen,Barkley,Ekeler,Lamb,Jefferson,AJ Brown,Kelce,Metcalf,McCaffrey,Tucker,JAX D/ST
+86,Rhodes 3,Allen,Hurts,Fournette,McCaffrey,Jefferson,Chase,Waddle,Andrews,Ekeler,McKinnon,Maher,JAX D/ST
+87,Matt R3,Mahomes,Allen,Mixon,Etienne,AJ Brown,Jefferson,Hill,Kittle,Lamb,Ekeler,Gano,TB D/ST
+88,Chris F,Mahomes,Allen,McCaffrey,Ekeler,Jefferson,Metcalf,Brown,Engram,Barkley,Mixon,Tucker,DAL D/ST
+89,Christian 2,Allen,Purdy,McKinnon,Ekeler,Jefferson,D Smith,Lamb,Engram,Fournette,Chase,Gano,SEA D/ST
+90,Joe K,Hurts,Burrow,Ekeler,Barkley,Diggs,Lamb,Jefferson,Kelce,Kittle,Evans,Tucker,JAX D/ST
+91,Will D,Hurts,Allen,McCaffrey,Ekeler,Jefferson,Chase,Lamb,Kelce,Hill,Barkley,Tucker,TB D/ST
+92,Nate,Allen,Burrow,McCaffrey,Barkley,K Allen,AJ Brown,Jefferson,Kelce,Evans,Metcalf,Patterson,DAL D/ST
+93,Frank,Mahomes,Prescott,McCaffrey,Barkley,Diggs,Chase,Jefferson,Andrews,AJ Brown,Evans,Patterson,LAC D/ST
+94,Slop,Allen,Cousins,Ekeler,Etienne,Higgins,Lamb,D Smith,Kelce,McCaffrey,Barkley,Tucker,TB D/ST
+95,KNICKREHM,Mahomes,Hurts,McCaffrey,Barkley,Chase,K Allen,Jefferson,Andrews,Evans,Etienne,Gano,DAL D/ST
+96,Chad G,Allen,Hurts,McCaffrey,Ekeler,Lamb,Chase,Jefferson,Kelce,Barkley,Godwin,Tucker,JAX D/ST
+97,James,Allen,Hurts,McCaffrey,Mixon,Evans,Osborn,Jones Jr,Kelce,Ekeler,Barkley,Tucker,DAL D/ST
+98,Dave A1,Hurts,Burrow,McCaffrey,D Cook,Kirk,Godwin,Diggs,Kelce,Ekeler,Hill,Tucker,DAL D/ST
+99,Dave A2,Mahomes,Hurts,McCaffrey,Mixon,Jefferson,Diggs,Evans,Andrews,Barkley,Ekeler,Myers,JAX D/ST
+100,Huebert,Allen,Prescott,McCaffrey,Ekeler,Hill,Chase,AJ Brown,Kelce,Andrews,Jefferson,Patterson,NYG D/ST
+101,DJ,Allen,Burrow,Ekeler,McCaffrey,Jefferson,Lamb,AJ Brown,Kelce,Barkley,Evans,Tucker,JAX D/ST
+102,Laurie,Allen,Burrow,McCaffrey,Fournette,Lamb,Jefferson,AJ Brown,Kelce,Waddle,K Allen,Tucker,SEA D/ST
+103,Tim L,Allen,Mahomes,Ekeler,Barkley,Kirk,Chase,Jefferson,Kittle,Hill,AJ Brown,Tucker,TB D/ST
+,,,,,,,,,,,,,

@@ -116,11 +116,11 @@ elif week == "11":
             to_30_list.append([player_name, m.owner, scorers[s], dist_from_30])
     to_30_df = pd.DataFrame(to_30_list, columns=["full_name", "owner", "score", "dist_to_30"])
     to_30_df = to_30_df.sort_values("dist_to_30", ascending=True)
-    win_val = to_30_df.dist_to_21.iloc[0]
-    winners = to_30_df.query("dist_to_21 == @win_val")
+    win_val = to_30_df.dist_to_30.iloc[0]
+    winners = to_30_df.query("dist_to_30 == @win_val")
     if winners.shape[0] == 1:
         winner = to_30_df.iloc[0]
-        winner_string = f"The player closest to 21 this week was {winner.full_name} with {winner.score} points; {winner.dist_to_21} away from 21.\n{winner.owner} wins the contest"
+        winner_string = f"The player closest to 30 this week was {winner.full_name} with {winner.score} points; {winner.dist_to_30} away from 21.\n{winner.owner} wins the contest"
     elif winners.shape[0] > 1:
         winner_string = f"The winners are {', '.join(list(winners.owner))}; who had {', '.join(list(winners.full_name))} score {', '.join(list(winners.score))} respectively."
     print(winner_string)
@@ -134,3 +134,5 @@ elif week == "11":
 # elif week == "13":
     # can be done via sleeper weekly report
 
+
+# %%
