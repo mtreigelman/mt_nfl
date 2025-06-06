@@ -139,24 +139,31 @@ draft = draft.rename(
     }
 )
 draft = draft.merge(rosters, on=["Player Id"], how="left")
+draft["Keeper"] = draft["Keeper"] == True 
 roster_cols = [
     "Player Id",
     "Round",
     "Draft Slot",
+    "Keeper",
 ]
 rosters = rosters.merge(draft[roster_cols], on=["Player Id"], how="left")
 rosters = rosters.merge(players, on=["Player Id"], how="left")
+rosters["Last Year's Keeper"] = rosters["Keeper"] == True 
+rosters = rosters.sort_values(["Owner", "Position"])[
+    ["Owner", "Position", "Player", "Round", "Draft Slot", "Last Year's Keeper"]
+]
 del draft["Player Id"]
-del rosters["Player Id"]
 
 #%% Saving Results
-draft.to_csv(f"{draft_year}_high_steaks_draft_results.csv", index=False)
-rosters = rosters.sort_values(["Owner", "Position"])[
-    ["Owner", "Position", "Player", "Round", "Draft Slot"]
-]
-rosters.to_csv(f"{draft_year}_high_steaks_final_rosters.csv", index=False)
+with pd.ExcelWriter(f"High_Steaks_{draft_year+1}_Keeper_Sheet.xlsx", engine='xlsxwriter') as writer:
+    draft.to_excel(writer, sheet_name=f"{draft_year} Draft", index=False)
+    rosters.to_excel(writer, sheet_name=f"{draft_year} Final Rosters", index=False)
 
-print("Two files saved.")
-print(f"draft_results/{draft_year}_high_steaks_draft_results.csv")
-print(f"draft_results/{draft_year}_high_steaks_final_rosters.csv")
+print("Single Excel File Saved.")
+# draft.to_csv(f"{draft_year}_high_steaks_draft_results.csv", index=False)
+# rosters.to_csv(f"{draft_year}_high_steaks_final_rosters.csv", index=False)
+
+# print("Two files saved.")
+# print(f"draft_results/{draft_year}_high_steaks_draft_results.csv")
+# print(f"draft_results/{draft_year}_high_steaks_final_rosters.csv")
 #%% End of script
