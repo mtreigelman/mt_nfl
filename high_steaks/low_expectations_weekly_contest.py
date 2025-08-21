@@ -2,6 +2,31 @@
 import requests
 import pandas as pd
 from sleeper_wrapper import League
+import nfl_data_py as nfl
+from functools import lru_cache
+
+@lru_cache(maxsize=None)
+def sleeper_week_projection(sleeper_pid: str, season: int, week: int) -> float:
+    url = f"https://api.sleeper.com/projections/nfl/player/{sleeper_pid}?season={season}&season_type=regular&grouping=week"
+    data = requests.get(url, timeout=15).json()
+    # find this week's projection; Sleeper projection objects commonly include pts_ppr/pts_half_ppr/pts_std
+    for row in data or []:
+        if str(row.get("week")) == str(week):
+            return row.get("pts_ppr") or row.get("pts_half_ppr") or row.get("pts_std") or 0.0
+    return 0.0
+
+
+def get_weekly_stats_df(season: int, week: int) -> pd.DataFrame:
+    # pull nflfastR weekly player stats
+    cols = [
+        "season","week","player_id","player_name","recent_team","position",
+        "rushing_yards","rushing_tds","receiving_receptions","receiving_yards","receiving_tds",
+        "passing_yards","passing_tds","interceptions"
+    ]
+    df = nfl.import_weekly_data([season])[cols]
+    df = df[(df["week"] == int(week)) & (df["season"] == int(season))].copy()
+    # player_id here is GSIS id; keep types consistent
+    return df
 
 league_id = str(1120567286148091904)
 league = League(league_id)
@@ -41,6 +66,15 @@ rosters = rosters.rename(columns={"owner_id":"user_id"})
 rosters = rosters.merge(users[["user_id","owner","display_name"]], on=["user_id"])
 matchups = matchups.merge(rosters[["roster_id", "user_id","owner","display_name"]], on=["roster_id"])
 
+# expand your players_df fields to include id mappings
+players_df = pd.DataFrame(requests.get("https://api.sleeper.app/v1/players/nfl").json()).T
+players_df = players_df[
+    ["player_id","full_name","position","first_name","last_name","gsis_id","espn_id","yahoo_id"]
+].copy()
+
+# build a Sleeper->GSIS map (some may be null; handle gracefully)
+sleeper_to_gsis = players_df.set_index("player_id")["gsis_id"].to_dict()
+
 # %%
 players_url = f"http://api.sleeper.app/v1/players/nfl"
 parsed_json = requests.get(players_url).json()
@@ -56,45 +90,38 @@ if week == "1":
 
 # week 2 - most offensive touchdowns
 elif week == "2":
-    # fetch weekly player stats (Sleeper)
-    # example URL pattern (documented by API clients around Sleeper’s stats endpoint)
-    stats = requests.get(
-        f"https://api.sleeper.com/stats/nfl/regular/{season}/{week}"
-    ).json()
-
-    # normalize into {player_id: stats_dict}
-    stats_by_pid = {row["player_id"]: row for row in stats if "player_id" in row}
+    stats_w = get_weekly_stats_df(int(season), int(week))
+    # build a quick look-up: gsis_id -> total offensive TDs (rush + rec + pass)
+    stats_w["off_td"] = stats_w["rushing_tds"].fillna(0) + stats_w["receiving_tds"].fillna(0) + stats_w["passing_tds"].fillna(0)
+    td_map = stats_w.set_index("player_id")["off_td"].to_dict()
 
     rows = []
     for _, m in matchups.iterrows():
-        td_sum = 0
+        total = 0
         for pid in m.starters:
-            s = stats_by_pid.get(pid, {})
-            td_sum += s.get("rushing_td", 0) + s.get("receiving_td", 0) + s.get("passing_td", 0)
-        rows.append((m.owner, td_sum))
+            gsis = sleeper_to_gsis.get(pid)
+            total += td_map.get(gsis, 0)
+        rows.append((m.owner, int(total)))
     out = pd.DataFrame(rows, columns=["owner","off_td"]).sort_values("off_td", ascending=False)
     top = out.off_td.max()
     winners = out.query("off_td == @top")
-    winner_string = f"Most offensive TDs: {', '.join(winners.owner)} with {top} TDs"
-    print(winner_string)
+    print(f"Most offensive TDs: {', '.join(winners.owner)} with {top} TDs")
 
 # week 3 - most WR receptions
 elif week == "3":
-    # weekly stats as above
-    stats = requests.get(
-        f"https://api.sleeper.com/stats/nfl/regular/{season}/{week}"
-    ).json()
-    stats_by_pid = {row["player_id"]: row for row in stats if "player_id" in row}
+    stats_w = get_weekly_stats_df(int(season), int(week))
+    rec_map = stats_w.set_index("player_id")["receiving_receptions"].fillna(0).to_dict()
 
-    # which starters are WRs?
-    wr_ids = set(players_df.query("position == 'WR'")["player_id"])
+    # set of WRs by Sleeper (your roster eligibility)
+    wr_ids = set(players_df.loc[players_df["position"]=="WR","player_id"])
     rows = []
     for _, m in matchups.iterrows():
         recs = 0
         for pid in m.starters:
             if pid in wr_ids:
-                recs += stats_by_pid.get(pid, {}).get("receptions", 0)
-        rows.append((m.owner, recs))
+                gsis = sleeper_to_gsis.get(pid)
+                recs += rec_map.get(gsis, 0)
+        rows.append((m.owner, int(recs)))
     out = pd.DataFrame(rows, columns=["owner","wr_receptions"]).sort_values("wr_receptions", ascending=False)
     top = out.wr_receptions.max()
     winners = out.query("wr_receptions == @top")
@@ -151,41 +178,37 @@ elif week == "6":
 
 # week 7 - most RB rushing yards
 elif week == "7":
-    stats = requests.get(
-        f"https://api.sleeper.com/stats/nfl/regular/{season}/{week}"
-    ).json()
-    stats_by_pid = {row["player_id"]: row for row in stats if "player_id" in row}
+    stats_w = get_weekly_stats_df(int(season), int(week))
+    rush_map = stats_w.set_index("player_id")["rushing_yards"].fillna(0).to_dict()
 
-    rb_ids = set(players_df.query("position == 'RB'")["player_id"])
+    rb_ids = set(players_df.loc[players_df["position"]=="RB","player_id"])
     rows = []
     for _, m in matchups.iterrows():
-        rush_yd = 0
+        yards = 0
         for pid in m.starters:
             if pid in rb_ids:
-                rush_yd += stats_by_pid.get(pid, {}).get("rushing_yd", 0)
-        rows.append((m.owner, rush_yd))
+                gsis = sleeper_to_gsis.get(pid)
+                yards += rush_map.get(gsis, 0)
+        rows.append((m.owner, int(yards)))
     out = pd.DataFrame(rows, columns=["owner","rb_rush_yd"]).sort_values("rb_rush_yd", ascending=False)
     top = out.rb_rush_yd.max()
     winners = out.query("rb_rush_yd == @top")
-    print(f"Most RB rushing yards: {', '.join(winners.owner)} with {int(top)} yards")
+    print(f"Most RB rushing yards: {', '.join(winners.owner)} with {top} yards")
 
 # week 8 - closet to projected points
 elif week == "8":
     # can be done via sleeper weekly report
-    # get projections for all players for this season, grouped by week
-    # (documented player projections endpoint with ?grouping=week)
-    # NOTE: we only need this week, so we’ll cache per player_id
-    def proj_for(pid):
-        url = f"https://api.sleeper.com/projections/nfl/player/{pid}?season={season}&season_type=regular&grouping=week"
-        try:
-            arr = requests.get(url).json()
-            # find this week’s projection (handle arr being list or dict-like)
-            for r in arr:
-                if str(r.get("week")) == str(week):
-                    return r.get("pts_ppr") or r.get("pts_half_ppr") or r.get("pts_std")
-        except Exception:
-            return None
-        return None
+    rows = []
+    for _, m in matchups.iterrows():
+        proj_sum = 0.0
+        act_sum  = 0.0
+        for pid in m.starters:
+            proj_sum += sleeper_week_projection(pid, int(season), int(week))
+            act_sum  += m.players_points.get(pid, 0.0)
+        rows.append((m.owner, proj_sum, act_sum, abs(act_sum - proj_sum)))
+    out = pd.DataFrame(rows, columns=["owner","proj_pts","actual_pts","abs_diff"]).sort_values("abs_diff")
+    best = out.iloc[0]
+    print(f"Closest to projection: {best.owner} (proj {best.proj_pts:.2f}, actual {best.actual_pts:.2f}, |Δ|={best.abs_diff:.2f})")
 
     rows = []
     for _, m in matchups.iterrows():
@@ -257,22 +280,22 @@ elif week == "11":
 
 # week 12 - most QB passing yards
 elif week == "12":
-    stats = requests.get(
-        f"https://api.sleeper.com/stats/nfl/regular/{season}/{week}"
-    ).json()
-    stats_by_pid = {row["player_id"]: row for row in stats if "player_id" in row}
-    qb_ids = set(players_df.query("position == 'QB'")["player_id"])
+    stats_w = get_weekly_stats_df(int(season), int(week))
+    pass_map = stats_w.set_index("player_id")["passing_yards"].fillna(0).to_dict()
+
+    qb_ids = set(players_df.loc[players_df["position"]=="QB","player_id"])
     rows = []
     for _, m in matchups.iterrows():
-        pass_yd = 0
+        yards = 0
         for pid in m.starters:
             if pid in qb_ids:
-                pass_yd += stats_by_pid.get(pid, {}).get("passing_yd", 0)
-        rows.append((m.owner, pass_yd))
+                gsis = sleeper_to_gsis.get(pid)
+                yards += pass_map.get(gsis, 0)
+        rows.append((m.owner, int(yards)))
     out = pd.DataFrame(rows, columns=["owner","qb_pass_yd"]).sort_values("qb_pass_yd", ascending=False)
     top = out.qb_pass_yd.max()
     winners = out.query("qb_pass_yd == @top")
-    print(f"Most QB passing yards: {', '.join(winners.owner)} with {int(top)} yards")
+    print(f"Most QB passing yards: {', '.join(winners.owner)} with {top} yards")
 
 
 
