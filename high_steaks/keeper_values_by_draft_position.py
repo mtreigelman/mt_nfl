@@ -1,4 +1,20 @@
 # -*- coding: utf-8 -*-
+# %% How to use: 
+"""
+
+This is script creates an excel file that can list the keeper value of players for an upcoming season. 
+**This works just for Sleeper Leagues only.**
+
+In order to run:
+1) Navigate to to the directory where this script is located in your command line. 
+2) Enter the following command:  
+`python keeper_values_by_draft_position.py --league_id <yourLeagueID> --draft_id <yourDraftID> --league_name <yourLeagueName> --year <currentYear>`
+* optionally you can specify the directory of the results file by passing the arguement `--file_location <Your/Desired/Directory/Path>`
+** The `draft_id` and `league_id` should be from the same year. So if you are trying to get the values for the upcoming 2025 season,
+    you should use the `draft_id` and `league_id` from the 2024 season, and the `year` arguement should be 2025.
+
+"""
+
 #%% Import libraries
 import sys 
 import requests
@@ -175,4 +191,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 #%% End of script
