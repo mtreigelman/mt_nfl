@@ -2,6 +2,27 @@
 #%% Import libraries
 import requests
 import pandas as pd
+import os
+import sys
+
+module_root = os.path.abspath(
+    os.path.join(
+        os.path.dirname(__file__),
+        "..",
+    )
+)
+sys.path.insert(0, module_root)
+
+# %%
+pd.read_csv(os.path.join(
+    module_root,
+    # "data",
+    # "fantasy",
+    "high_steaks",
+    "draft_histories.csv"
+))
+
+
 
 print(
     "Now running the script to create the keepers page for the High Steaks Fantasy Fooball League..."
@@ -156,8 +177,8 @@ del draft["Player Id"]
 
 #%% Saving Results
 with pd.ExcelWriter(f"High_Steaks_{draft_year+1}_Keeper_Sheet.xlsx", engine='xlsxwriter') as writer:
-    draft.to_excel(writer, sheet_name=f"{draft_year} Draft", index=False)
     rosters.to_excel(writer, sheet_name=f"{draft_year} Final Rosters", index=False)
+    draft.to_excel(writer, sheet_name=f"{draft_year} Draft", index=False)
 
 print("Single Excel File Saved.")
 # draft.to_csv(f"{draft_year}_high_steaks_draft_results.csv", index=False)

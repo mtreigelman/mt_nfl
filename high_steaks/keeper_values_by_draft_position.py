@@ -29,7 +29,7 @@ class KeeperValueDecider:
         draft_id: str,
         league_name: str,
         year: int,
-        file_location: str, 
+        file_location=None, 
     ):
         self.league_id = str(league_id)
         self.draft_id = draft_id
@@ -68,7 +68,7 @@ class KeeperValueDecider:
         new_col_names = {
             col: " ".join([c.capitalize() for c in col.split("_")]) for col in self.keep_cols
         }
-        draft = draft.rename(columns=new_col_names)
+        self.draft = draft.rename(columns=new_col_names)
         return self.draft
     
     def get_user_data(self) -> pd.DataFrame:
@@ -83,7 +83,7 @@ class KeeperValueDecider:
             user_data.append(alldata)
 
         owners = pd.DataFrame(user_data)
-        self.owners = owners.rename(columns={"user_id": "picked_by"})
+        self.owners = owners.rename(columns={"user_id": "Picked By"})
         return self.owners
     
     def get_rosters(self) -> pd.DataFrame:
@@ -140,25 +140,31 @@ class KeeperValueDecider:
             columns={
                 "display_name": "User Name",
                 "team_name": "Team Name",
-                "Owner": "Picked By",
+                # "display_name": "Picked By",
                 "Is Keeper": "Keeper",
             }
         )
         draft_df = draft_df.merge(rosters_df, on=["Player Id"], how="left")
         draft_df["Keeper"] = draft_df["Keeper"] == True 
+        
         roster_cols = [
             "Player Id",
             "Round",
             "Draft Slot",
+            "User Name",
             "Keeper",
         ]
         rosters_df = rosters_df.merge(draft_df[roster_cols], on=["Player Id"], how="left")
         rosters_df = rosters_df.merge(players_df, on=["Player Id"], how="left")
         rosters_df["Last Year's Keeper"] = rosters_df["Keeper"] == True 
-        rosters_df = rosters_df.sort_values(["Owner", "Position"])[
-            ["Owner", "Position", "Player", "Round", "Draft Slot", "Last Year's Keeper"]
+        rosters_df = rosters_df.sort_values(["User Name", "Position"])[
+            ["User Name", "Position", "Player", "Round", "Draft Slot", "Last Year's Keeper"]
         ]
-        del draft_df["Player Id"]
+        # del draft_df["Player Id"]
+        draft_df = draft_df.rename(columns={"User Name": "Picked By",})
+        draft_df = draft_df[[
+            "Player","Position","Team","Round","Draft Slot","Keeper","Picked By",
+        ]]
 
         with pd.ExcelWriter(self.results_location, engine='xlsxwriter') as writer:
             draft_df.to_excel(writer, sheet_name=f"{self.year - 1} Draft", index=False)
@@ -181,6 +187,8 @@ def main():
     args = p.parse_args()
 
     engine = KeeperValueDecider(league_id=args.league_id, draft_id=args.draft_id, league_name=args.league_name, year=args.year, file_location=args.file_location)
+
+    # engine = KeeperValueDecider(league_id='1117575265233842176', draft_id='1117575265233842177', league_name='High Steaks', year=2025)
     try:
         msg = engine.run()
         print(msg)
@@ -192,4 +200,4 @@ def main():
 if __name__ == "__main__":
     main()
 
-#%% End of script
+# End 
