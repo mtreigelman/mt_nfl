@@ -1,6 +1,7 @@
 # %%
 import requests
 import pandas as pd
+import argparse
 from sleeper_wrapper import League
 import nfl_data_py as nfl
 from functools import lru_cache
@@ -28,13 +29,34 @@ def get_weekly_stats_df(season: int, week: int) -> pd.DataFrame:
     # player_id here is GSIS id; keep types consistent
     return df
 
-league_id = str(1120567286148091904)
-league = League(league_id)
+p = argparse.ArgumentParser(description="Sleeper Weekly Challenge Engine")
+p.add_argument("--league_id", required=False, default=None, help="Sleeper league ID")
+p.add_argument("--season", type=int, required=False, default=None, help="Season (defaults to current from Sleeper state)")
+p.add_argument("--week", type=int, required=False, default=None,help="NFL regular season week number (1-18)")
+# p.add_argument("--projections", choices=["sleeper", "rolling"], default=None, help="Projection provider for week 8 or other projection-based challenges")
+# p.add_argument("--rolling_n", type=int, default=3, help="N for rolling-average projections when --projections rolling")
+args = p.parse_args()
 
-nfl_state = requests.get("https://api.sleeper.app/v1/state/nfl").json()
-# season = nfl_state["season"]
-season = 2024
-week = nfl_state["week"]
+if args.league_id is None: 
+    league_id = str(1120567286148091904)
+else: 
+    league_id = args.league_id
+
+if args.season is None: 
+    # nfl_state = requests.get("https://api.sleeper.app/v1/state/nfl").json()
+    # season = nfl_state["season"]
+    season=2024
+else:
+    season=args.season
+
+if args.week is None: 
+    # week=str(input("what week of the season are you looking for?"))
+    # week = nfl_state["week"]
+    week=2
+else: 
+    week=args.week
+
+league = League(league_id)
 user2owner = {
     "mtreigelman":"Reigelman",
     "Tophinator":"Christoph",
@@ -49,8 +71,7 @@ user2owner = {
     "bobm18":"Bobby",
     "jide49":"Jide",
 }
-# week=str(input("what week of the season are you looking for?"))
-week=2
+
 print(f"Looking at {season} Week {week}")
 # %%
 matchups = league.get_matchups(week)
@@ -195,7 +216,7 @@ elif week == "7":
     winners = out.query("rb_rush_yd == @top")
     print(f"Most RB rushing yards: {', '.join(winners.owner)} with {top} yards")
 
-# week 8 - closet to projected points
+# week 8 - closet to team projected points
 elif week == "8":
     # can be done via sleeper weekly report
     rows = []
